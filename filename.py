@@ -38,7 +38,7 @@ print(dict(first_tweet))
 'created_at': datetime.datetime(2022, 6, 29, 23, 59, 55, tzinfo=datetime.timezone.utc), 
 'source': 'Twitter for iPhone', 
 'id': 1542296839923421184}
-codio@pythonhope-scriptjester:~/workspace$ 
+#codio@pythonhope-scriptjester:~/workspace$ 
 
 '''
 from pytwitter import Api
