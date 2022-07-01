@@ -33,11 +33,7 @@ print(len(tweets.includes["users"]))
 first_tweet = tweets.data[0]
 print(dict(first_tweet))
 
-{'author_id': 1000198128526659584, 
-'text': '.@ACPinternists ACP 2022-2023 Officers &amp; Officers-Elect (Dr. Omar Atiq &amp; @DocPhx &amp; @EileenBarrettNM &amp; ACP Treasurer @drjanetj. Those who #Selfie together stay together. #Vaxxed #Boosted #Masked b/c #COVID19.\nPhoto credit @EileenBarrettNM. #IMProud #PhysicianAdvocates #IMEssential https://t.co/XzRp4PvSQT', 
-'created_at': datetime.datetime(2022, 6, 29, 23, 59, 55, tzinfo=datetime.timezone.utc), 
-'source': 'Twitter for iPhone', 
-'id': 1542296839923421184}
+
 #codio@pythonhope-scriptjester:~/workspace$ 
 
 '''
