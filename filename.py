@@ -257,8 +257,4 @@ curl "https://api.twitter.com/2/tweets?ids=1261326399320715264,12783474686909153
   -H "Authorization: Bearer AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAA4p71COrAvPc0LStkr10f2eG258I%3Dyr3zOmQTjNnBnnr01JH7Hp9DMoQAU2t2OYmspWouuO52PWoJy1"
 
     
-<<<<<<< HEAD
 '''
-=======
-'''
->>>>>>> a6d0142857b7bf42fe93a803337f7eb920b91870
