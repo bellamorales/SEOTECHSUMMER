@@ -1,14 +1,18 @@
-import tweepy
-# import the pandas library
+import tweepy 
 import pandas as pd
 import sqlalchemy as db
 
 
 # your bearer token
 MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
-# create your client 
-client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
 
+# create your client with bearer_token
+#would test if client was created and created with the correct info
+def create_client(MY_BEARER_TOKEN):
+  client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
+  return client
+
+#simply a string that tells the Twitter API what kind of tweets you want to search for
 search_query = "#covid19 -in:retweets"
 
 # query to search for tweets
@@ -19,7 +23,9 @@ start_time = "2022-06-29T00:00:00Z"
 end_time = "2022-06-30T00:00:00Z"
 
 # get tweets from the API
-tweets = client.search_recent_tweets(query=query,
+#would test if function only returns requested information in dict format
+def get_tweets():
+  tweets = client.search_recent_tweets(query=query,
                                      start_time=start_time,
                                      end_time=end_time,
                                      tweet_fields = ["created_at", "text", "source"],
@@ -27,47 +33,65 @@ tweets = client.search_recent_tweets(query=query,
                                      max_results = 10,
                                      expansions='author_id'
                                      )
+  return tweets
 
 # tweet specific info
-#print(len(tweets.data))
+print(len(tweets.data))
 # user specific info
-#print(len(tweets.includes["users"]))
+print(len(tweets.includes["users"]))
 
 # first tweet
 first_tweet = tweets.data[0]
-
-#print(dict(first_tweet))
+print(dict(first_tweet))
 
 # create a dict of records
-tweet_info_dict = {}
+#check the format of the tweet dictionary so that the keys say the 
+#kind of information and the correct values are obtained 
+#also test if only 10 tweets are returned
+def create_tweet_dict():
+  tweet_info_dict = {}
+  count = 0
 
-
-# iterate over each tweet and corresponding user details
-count = 0
-for tweet, user in zip(tweets.data, tweets.includes['users']):
+  # iterate over each tweet and corresponding user details
+  for tweet, user in zip(tweets.data, tweets.includes['users']):
     tweet_val = [tweet.created_at , user.username, user.description]
     tweet_info_dict[count] = tweet_val
     count += 1
+  return tweet_info_dict
 
 # create dataframe from the extracted records
-#tweets_df = pd.DataFrame(tweet_info_ls)
-# display the dataframe
-#tweets_df.head()
-#print(tweets_df)
-tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', columns=['creates_at', 'username', 'description'])
-print(tweets_df2)
+#Test if created database table is formated correctly with properly named
+#columns and rows with the correct infomation places in each 
+def create_database(tweet_info_dict):
+  # create dataframe from the extracted records
+  tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', columns=['creates_at', 'username', 'description'])
+  #print(tweets_df2)
 
-engine = db.create_engine('sqlite:///data_base_name.db')
-tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace', index=False)
+  #creating a database from dataframe
+  engine = db.create_engine('sqlite:///data_base_name.db')
+  tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace', index=False)
+  query_result = engine.execute("SELECT * FROM tweet_info_dict;").fetchall()
+  return query_result
 
-query_result = engine.execute("SELECT * FROM tweet_info_dict;").fetchall()
-print(pd.DataFrame(query_result))
 
-print(dict(first_tweet))
+#Testing Code 
+if __name__ == "__main__":
 
+
+
+
+#print(pd.DataFrame(query_result))
+
+#print(dict(first_tweet))
 
 
 #codio@pythonhope-scriptjester:~/workspace$ 
+
+'''
+What is a normal example of what would be passed to this function?
+What would be a weird value to pass to this function (but the system would still send) - null objects, empty strings, an unexpected data type, etc.
+If getting user input - what would happen if a kitten or baby mashed keys instead of giving the input you asked for?
+'''
 
 '''
 from pytwitter import Api
