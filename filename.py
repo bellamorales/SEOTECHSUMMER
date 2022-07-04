@@ -1,4 +1,8 @@
 import tweepy
+# import the pandas library
+import pandas as pd
+import sqlalchemy as db
+
 
 # your bearer token
 MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
@@ -25,13 +29,42 @@ tweets = client.search_recent_tweets(query=query,
                                      )
 
 # tweet specific info
-print(len(tweets.data))
+#print(len(tweets.data))
 # user specific info
-print(len(tweets.includes["users"]))
+#print(len(tweets.includes["users"]))
 
 # first tweet
 first_tweet = tweets.data[0]
+
+#print(dict(first_tweet))
+
+# create a dict of records
+tweet_info_dict = {}
+
+
+# iterate over each tweet and corresponding user details
+count = 0
+for tweet, user in zip(tweets.data, tweets.includes['users']):
+    tweet_val = [tweet.created_at , user.username, user.description]
+    tweet_info_dict[count] = tweet_val
+    count += 1
+
+# create dataframe from the extracted records
+#tweets_df = pd.DataFrame(tweet_info_ls)
+# display the dataframe
+#tweets_df.head()
+#print(tweets_df)
+tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', columns=['creates_at', 'username', 'description'])
+print(tweets_df2)
+
+engine = db.create_engine('sqlite:///data_base_name.db')
+tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace', index=False)
+
+query_result = engine.execute("SELECT * FROM tweet_info_dict;").fetchall()
+print(pd.DataFrame(query_result))
+
 print(dict(first_tweet))
+
 
 
 #codio@pythonhope-scriptjester:~/workspace$ 
