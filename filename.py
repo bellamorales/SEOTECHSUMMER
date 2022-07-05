@@ -48,8 +48,8 @@ def get_tweets():
                                      expansions='author_id'
                                      )
         return tweets
-  except:
-      print("Invalid Tweet Request. Inputted date is not from the past 7 days")
+    except:
+        print("Invalid Tweet Request. Inputted date is not from the past 7 days")
 
 # tweet specific info
 #print(len(tweets.data))
