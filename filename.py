@@ -7,7 +7,7 @@ import datetime
 # GOAL: have user input date from past 7 days to get tweets from that day
 # your bearer token
 MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj" +
-"9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
+                  "9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
 
 # create your client with bearer_token
 client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
@@ -38,7 +38,7 @@ query = "#covid19 lang:en -is:retweet"
 # end_time = "2022-06-30T00:00:00Z"
 
 # get tweets from the API
-#would test if function only returns requested information in dict format
+# would test if function only returns requested information in dict format
 
 
 def get_tweets():
@@ -46,11 +46,11 @@ def get_tweets():
     start_time = str(date) + "T00:00:00Z"
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
-        tweets = client.search_recent_tweets(query = query, 
-        start_time=start_time, end_time=end_time, 
+        tweets = client.search_recent_tweets(query = query,
+        start_time = start_time, end_time = end_time,
         tweet_fields = ["created_at", "text", "source"],
         user_fields = ["name", "username", "location", "verified", "description"],
-        max_results = 10, expansions='author_id')
+        max_results = 10, expansions = 'author_id')
 
         return tweets
     except:
@@ -69,13 +69,15 @@ def get_tweets():
 #check the format of the tweet dictionary so that the keys say the 
 #kind of information and the correct values are obtained 
 #also test if only 10 tweets are returned
+
+
 def create_tweet_dict(tweets):
     tweet_info_dict = {}
     count = 0
 
     #iterate over each tweet and corresponding user details
     for tweet, user in zip(tweets.data, tweets.includes['users']):
-        tweet_val = [tweet.created_at , user.username, user.description]
+        tweet_val = [tweet.created_at, user.username, user.description]
         tweet_info_dict[count] = tweet_val
         count += 1
     return tweet_info_dict
