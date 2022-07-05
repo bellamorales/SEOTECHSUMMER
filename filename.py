@@ -82,8 +82,8 @@ def get_tweets():
 
 
 def create_tweet_dict(tweets):
-    if tweets == None:
-      return None
+    if tweets is None:
+        return None
     tweet_info_dict = {}
     count = 0
 
@@ -100,7 +100,7 @@ def create_tweet_dict(tweets):
 
 
 def create_database(tweet_info_dict):
-    if tweet_info_dict == None:
+    if tweet_info_dict is None:
       return None
     # create dataframe from the extracted records
     tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index',
