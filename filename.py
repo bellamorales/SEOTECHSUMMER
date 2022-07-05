@@ -62,7 +62,7 @@ def get_tweets():
                                              expansions='author_id')
 
         return tweets
-    except:
+    except tweepy.errors.BadRequest:
         print("Invalid Tweet Request. Inputted date is not from",
               "the past 7 days")
 
@@ -82,6 +82,8 @@ def get_tweets():
 
 
 def create_tweet_dict(tweets):
+    if tweets == None:
+      return None
     tweet_info_dict = {}
     count = 0
 
@@ -98,6 +100,8 @@ def create_tweet_dict(tweets):
 
 
 def create_database(tweet_info_dict):
+    if tweet_info_dict == None:
+      return None
     # create dataframe from the extracted records
     tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index',
                                         columns=['creates_at', 'username',
