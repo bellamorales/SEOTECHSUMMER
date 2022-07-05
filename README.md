@@ -1,6 +1,5 @@
 # SEOTECHSUMMER
-## In your README.md, write up notes about your project, including:
-1. **Setup instructions**
+gt1. **Setup instructions**
     * NEED TO HAVE TWITTER DEVELOPER ACCOUNT
     * Libraries to Install
       * python twitter API: tweepy
