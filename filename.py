@@ -48,18 +48,18 @@ def get_tweets():
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
         tweets = client.search_recent_tweets(query = query,
-                                              start_time = start_time,
-                                              end_time = end_time,
-                                              tweet_fields = ["created_at",
+                                             start_time = start_time,
+                                             end_time = end_time,
+                                             tweet_fields = ["created_at",
                                                                "text",
                                                               "source"],
-                                              user_fields = ["name",
+                                             user_fields = ["name",
                                                               "username",
                                                               "location",
                                                               "verified",
                                                               "description"],
-                                              max_results = 10,
-                                              expansions = 'author_id')
+                                             max_results = 10,
+                                             expansions = 'author_id')
 
         return tweets
     except:
@@ -94,7 +94,7 @@ def create_tweet_dict(tweets):
 
 # create dataframe from the extracted records
 # Test if created database table is formated correctly with properly named
-# columns and rows with the correct infomation places in each 
+# columns and rows with the correct infomation places in each
 
 
 def create_database(tweet_info_dict):
@@ -106,12 +106,13 @@ def create_database(tweet_info_dict):
 
     # creating a database from dataframe
     engine = db.create_engine('sqlite:///data_base_name.db')
-    tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace', index=False)
+    tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace',
+                      index=False)
     query_result = engine.execute("SELECT * FROM tweet_info_dict;").fetchall()
     return query_result
 
 
-# Testing Code 
+# Testing Code
 if __name__ == "__main__":
     # print(len(get_tweets()))
     # print(type(get_tweets()))
@@ -127,4 +128,4 @@ if __name__ == "__main__":
 # print(dict(first_tweet))
 
 
-# codio@pythonhope-scriptjester:~/workspace$ 
+# codio@pythonhope-scriptjester:~/workspace$
