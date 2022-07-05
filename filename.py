@@ -16,7 +16,7 @@ client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
 def get_date():
     try:
         user_date = input("Enter the date you want tweets from past " +
-        "7 days(in MM/DD/YYYY):")
+  "7 days(in MM/DD/YYYY):")
         date = datetime.datetime.strptime(user_date, "%m/%d/%Y").date()
         print("Searching tweets from " + str(date))
         return date
@@ -26,7 +26,7 @@ def get_date():
         get_date()
 
 
-# simply a string that tells the Twitter API what kind of tweets 
+# simply a string that tells the Twitter API what kind of tweets
 # you want to search for
 search_query = "#covid19 -in:retweets"
 
@@ -34,8 +34,8 @@ search_query = "#covid19 -in:retweets"
 query = "#covid19 lang:en -is:retweet"
 
 # your start and end time for fetching tweets
-#start_time = "2022-06-29T00:00:00Z"
-#end_time = "2022-06-30T00:00:00Z"
+# start_time = "2022-06-29T00:00:00Z"
+# end_time = "2022-06-30T00:00:00Z"
 
 # get tweets from the API
 #would test if function only returns requested information in dict format
@@ -46,14 +46,12 @@ def get_tweets():
     start_time = str(date) + "T00:00:00Z"
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
-        tweets = client.search_recent_tweets(query = query,
-                                     start_time=start_time,
-                                     end_time=end_time,
-                                     tweet_fields = ["created_at", "text", "source"],
-                                     user_fields = ["name", "username", "location", "verified", "description"],
-                                     max_results = 10,
-                                     expansions='author_id'
-                                     )
+        tweets = client.search_recent_tweets(query = query, 
+        start_time=start_time, end_time=end_time, 
+        tweet_fields = ["created_at", "text", "source"],
+        user_fields = ["name", "username", "location", "verified", "description"],
+        max_results = 10, expansions='author_id')
+
         return tweets
     except:
         print("Invalid Tweet Request. Inputted date is not from the past 7 days")
