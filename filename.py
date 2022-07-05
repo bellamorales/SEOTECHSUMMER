@@ -7,8 +7,8 @@ import datetime
 # GOAL: have user input date from past 7 days to get tweets from that day
 # your bearer token
 MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj" +
-                    "9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7" +
-                    "O2LaWNIoJjnB"
+                  "9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7" +
+                  "O2LaWNIoJjnB"
 
 # create your client with bearer_token
 client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
@@ -16,8 +16,8 @@ client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
 
 def get_date():
     try:
-        user_date = input("Enter the date you want tweets from past " +
-                            "7 days(in MM/DD/YYYY):")
+        user_date = input("Enter the date you want tweets from past",
+                          "7 days(in MM/DD/YYYY):")
         date = datetime.datetime.strptime(user_date, "%m/%d/%Y").date()
         print("Searching tweets from " + str(date))
         return date
@@ -48,17 +48,17 @@ def get_tweets():
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
         tweets = client.search_recent_tweets(query = query,
-                                              start_time = start_time, 
+                                              start_time = start_time,
                                               end_time = end_time,
                                               tweet_fields = ["created_at",
                                                                "text",
                                                               "source"],
-                                              user_fields = ["name", 
+                                              user_fields = ["name",
                                                               "username",
                                                               "location",
-                                                              "verified", 
+                                                              "verified",
                                                               "description"],
-                                              max_results = 10, 
+                                              max_results = 10,
                                               expansions = 'author_id')
 
         return tweets
@@ -99,7 +99,9 @@ def create_tweet_dict(tweets):
 
 def create_database(tweet_info_dict):
     # create dataframe from the extracted records
-    tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', columns=['creates_at', 'username', 'description'])
+    tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', 
+                                        columns=['creates_at', 'username',
+                                                 'description'])
     # print(tweets_df2)
 
     # creating a database from dataframe
@@ -109,7 +111,7 @@ def create_database(tweet_info_dict):
     return query_result
 
 
-#Testing Code 
+# Testing Code 
 if __name__ == "__main__":
     # print(len(get_tweets()))
     # print(type(get_tweets()))
@@ -120,9 +122,9 @@ if __name__ == "__main__":
     print((pd.DataFrame(query_result)))
 
 
-#print(pd.DataFrame(query_result))
+# print(pd.DataFrame(query_result))
 
-#print(dict(first_tweet))
+# print(dict(first_tweet))
 
 
-#codio@pythonhope-scriptjester:~/workspace$ 
+# codio@pythonhope-scriptjester:~/workspace$ 
