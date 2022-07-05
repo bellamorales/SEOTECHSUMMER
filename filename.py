@@ -101,7 +101,7 @@ def create_tweet_dict(tweets):
 
 def create_database(tweet_info_dict):
     if tweet_info_dict is None:
-      return None
+        return None
     # create dataframe from the extracted records
     tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index',
                                         columns=['creates_at', 'username',
