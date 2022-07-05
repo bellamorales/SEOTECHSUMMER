@@ -47,19 +47,19 @@ def get_tweets():
     start_time = str(date) + "T00:00:00Z"
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
-        tweets = client.search_recent_tweets(query = query,
-                                             start_time = start_time,
-                                             end_time = end_time,
-                                             tweet_fields = ["created_at",
-                                                               "text",
-                                                              "source"],
-                                             user_fields = ["name",
-                                                              "username",
-                                                              "location",
-                                                              "verified",
-                                                              "description"],
-                                             max_results = 10,
-                                             expansions = 'author_id')
+        tweets = client.search_recent_tweets(query=query,
+                                             start_time=start_time,
+                                             end_time=end_time,
+                                             tweet_fields=["created_at",
+                                                           "text",
+                                                           "source"],
+                                             user_fields=["name",
+                                                          "username",
+                                                          "location",
+                                                          "verified",
+                                                          "description"],
+                                             max_results=10,
+                                             expansions='author_id')
 
         return tweets
     except:
@@ -99,7 +99,7 @@ def create_tweet_dict(tweets):
 
 def create_database(tweet_info_dict):
     # create dataframe from the extracted records
-    tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', 
+    tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index',
                                         columns=['creates_at', 'username',
                                                  'description'])
     # print(tweets_df2)
