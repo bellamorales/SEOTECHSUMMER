@@ -1,5 +1,5 @@
 # SEOTECHSUMMER
-gt1. **Setup instructions**
+1. **Setup instructions**
     * NEED TO HAVE TWITTER DEVELOPER ACCOUNT
     * Libraries to Install
       * python twitter API: tweepy
