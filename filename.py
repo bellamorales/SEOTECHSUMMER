@@ -1,15 +1,17 @@
-import tweepy 
+import tweepy
 import pandas as pd
 import sqlalchemy as db
 import datetime  
 
 
-#GOAL: have user input date from past 7 days to get tweets from that day 
+#GOAL: have user input date from past 7 days to get tweets from that day
 # your bearer token
-MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
+MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj" + 
+                  "9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
 
 # create your client with bearer_token
 client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
+
 
 def get_date():
     try:
@@ -21,6 +23,7 @@ def get_date():
         print("You did not form the date correctly. Please insert the month " +
               "then the day then the year.")
         get_date()
+
 
 #simply a string that tells the Twitter API what kind of tweets you want to search for
 search_query = "#covid19 -in:retweets"
@@ -39,7 +42,7 @@ def get_tweets():
     start_time = str(date) + "T00:00:00Z"
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
-        tweets = client.search_recent_tweets(query=query,
+        tweets = client.search_recent_tweets(query = query,
                                      start_time=start_time,
                                      end_time=end_time,
                                      tweet_fields = ["created_at", "text", "source"],
@@ -68,7 +71,7 @@ def create_tweet_dict(tweets):
     tweet_info_dict = {}
     count = 0
 
-    # iterate over each tweet and corresponding user details
+    #iterate over each tweet and corresponding user details
     for tweet, user in zip(tweets.data, tweets.includes['users']):
         tweet_val = [tweet.created_at , user.username, user.description]
         tweet_info_dict[count] = tweet_val
