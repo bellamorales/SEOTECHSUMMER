@@ -63,7 +63,8 @@ def get_tweets():
 
         return tweets
     except:
-        print("Invalid Tweet Request. Inputted date is not from the past 7 days")
+        print("Invalid Tweet Request. Inputted date is not from",
+              "the past 7 days")
 
 # tweet specific info
 # print(len(tweets.data))
@@ -84,7 +85,7 @@ def create_tweet_dict(tweets):
     tweet_info_dict = {}
     count = 0
 
-    #iterate over each tweet and corresponding user details
+    # iterate over each tweet and corresponding user details
     for tweet, user in zip(tweets.data, tweets.includes['users']):
         tweet_val = [tweet.created_at, user.username, user.description]
         tweet_info_dict[count] = tweet_val
@@ -92,16 +93,16 @@ def create_tweet_dict(tweets):
     return tweet_info_dict
 
 # create dataframe from the extracted records
-#Test if created database table is formated correctly with properly named
-#columns and rows with the correct infomation places in each 
+# Test if created database table is formated correctly with properly named
+# columns and rows with the correct infomation places in each 
 
 
 def create_database(tweet_info_dict):
     # create dataframe from the extracted records
     tweets_df2 = pd.DataFrame.from_dict(tweet_info_dict, orient='index', columns=['creates_at', 'username', 'description'])
-    #print(tweets_df2)
+    # print(tweets_df2)
 
-    #creating a database from dataframe
+    # creating a database from dataframe
     engine = db.create_engine('sqlite:///data_base_name.db')
     tweets_df2.to_sql('tweet_info_dict', con=engine, if_exists='replace', index=False)
     query_result = engine.execute("SELECT * FROM tweet_info_dict;").fetchall()
@@ -112,7 +113,7 @@ def create_database(tweet_info_dict):
 if __name__ == "__main__":
     # print(len(get_tweets()))
     # print(type(get_tweets()))
-    #get_date()
+    # get_date()
     tweets = get_tweets()
     tweet_info_dict = create_tweet_dict(tweets)
     query_result = create_database(tweet_info_dict)
