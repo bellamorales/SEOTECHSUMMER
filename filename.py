@@ -15,7 +15,7 @@ client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
 
 def get_date():
     try:
-        user_date = input("Enter the date you want tweets from past "+
+        user_date = input("Enter the date you want tweets from past " +
         "7 days(in MM/DD/YYYY):")
         date = datetime.datetime.strptime(user_date, "%m/%d/%Y").date()
         print("Searching tweets from " + str(date))
@@ -26,7 +26,8 @@ def get_date():
         get_date()
 
 
-#simply a string that tells the Twitter API what kind of tweets you want to search for
+# simply a string that tells the Twitter API what kind of tweets 
+# you want to search for
 search_query = "#covid19 -in:retweets"
 
 # query to search for tweets
@@ -38,6 +39,8 @@ query = "#covid19 lang:en -is:retweet"
 
 # get tweets from the API
 #would test if function only returns requested information in dict format
+
+
 def get_tweets():
     date = get_date()
     start_time = str(date) + "T00:00:00Z"
