@@ -6,8 +6,8 @@ import datetime
 
 # GOAL: have user input date from past 7 days to get tweets from that day
 # your bearer token
-MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj" + 
-    "9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
+MY_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAMMDeQEAAAAAMz660hdSEQZjQmiJmZj" +
+"9soNCmqw%3DMY3CJ67dLS0EYWqTcVjLPYt3bzuhAyNTPFl8S7O2LaWNIoJjnB"
 
 # create your client with bearer_token
 client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
@@ -15,7 +15,8 @@ client = tweepy.Client(bearer_token=MY_BEARER_TOKEN)
 
 def get_date():
     try:
-        user_date = input("Enter the date you want tweets from past 7 days(in MM/DD/YYYY):")
+        user_date = input("Enter the date you want tweets from past "+
+        "7 days(in MM/DD/YYYY):")
         date = datetime.datetime.strptime(user_date, "%m/%d/%Y").date()
         print("Searching tweets from " + str(date))
         return date
