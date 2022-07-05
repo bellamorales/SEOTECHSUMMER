@@ -48,11 +48,18 @@ def get_tweets():
     end_time = str(date + datetime. timedelta(days=1)) + "T00:00:00Z"
     try:
         tweets = client.search_recent_tweets(query = query,
-        start_time = start_time, end_time = end_time,
-        tweet_fields = ["created_at", "text", "source"],
-        user_fields = ["name", "username", "location",
-                        "verified", "description"],
-        max_results = 10, expansions = 'author_id')
+                                              start_time = start_time, 
+                                              end_time = end_time,
+                                              tweet_fields = ["created_at",
+                                                               "text",
+                                                              "source"],
+                                              user_fields = ["name", 
+                                                              "username",
+                                                              "location",
+                                                              "verified", 
+                                                              "description"],
+                                              max_results = 10, 
+                                              expansions = 'author_id')
 
         return tweets
     except:
