@@ -19,5 +19,5 @@ jobs:
         run: pycodestyle --first *.py
       - name: Test with pytest  # This is new!
         run: |
-          python3 -m unittest test_file.py
+          python3 -m unittest unitTesting.py 
 
